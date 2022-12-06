@@ -1,66 +1,40 @@
 <template>
-  <el-scrollbar>
-    <el-menu :default-openeds="['1', '3']">
-      <el-sub-menu index="1">
-        <template #title>
-          <el-icon><message /></el-icon>导航一
-        </template>
-        <el-menu-item-group>
-          <template #title>分组一</template>
-          <el-menu-item index="1-1">选项1</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="分组二">
-          <el-menu-item index="1-3">选项3</el-menu-item>
-        </el-menu-item-group>
-        <el-sub-menu index="1-4">
-          <template #title>选项4</template>
-          <el-menu-item index="1-4-1">选项4-1</el-menu-item>
-        </el-sub-menu>
-      </el-sub-menu>
-      <el-sub-menu index="2">
-        <template #title>
-          <el-icon><icon-menu /></el-icon>导航二
-        </template>
-        <el-menu-item-group>
-          <template #title>分组一</template>
-          <el-menu-item index="2-1">选项1</el-menu-item>
-          <el-menu-item index="2-2">选项2</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="分组二">
-          <el-menu-item index="2-3">选项3</el-menu-item>
-        </el-menu-item-group>
-        <el-sub-menu index="2-4">
-          <template #title>选项4</template>
-          <el-menu-item index="2-4-1">选项4-1</el-menu-item>
-        </el-sub-menu>
-      </el-sub-menu>
-      <el-sub-menu index="3">
-        <template #title>
-          <el-icon><setting /></el-icon>导航三
-        </template>
-        <el-menu-item-group>
-
-          <template #title>分组一</template>
-          <el-menu-item index="3-1">选项1</el-menu-item>
-          <el-menu-item index="3-2">选项2</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="分组二">
-          <el-menu-item index="3-3">选项3</el-menu-item>
-        </el-menu-item-group>
-        <el-sub-menu index="3-4">
-          <template #title>选项4</template>
-          <el-menu-item index="3-4-1">选项4-1</el-menu-item>
-        </el-sub-menu>
-      </el-sub-menu>
-    </el-menu>
-  </el-scrollbar>
+      <el-menu
+          style="height: 100vh"
+          active-text-color="#ffd04b"
+          background-color="#545c64"
+          class="el-menu-vertical-demo"
+          default-active="/Home"
+          text-color="#fff"
+          :collapse=collapse
+      >
+        <el-menu-item index="/Home">
+          <el-icon><House @click="isCollapse" /></el-icon>
+          <span>首页</span>
+        </el-menu-item>
+        <el-menu-item index="/One">
+          <el-icon><Flag /></el-icon>
+          <span>待定一</span>
+        </el-menu-item>
+        <el-menu-item index="/Tow">
+          <el-icon><Opportunity /></el-icon>
+          <span>待定二</span>
+        </el-menu-item>
+      </el-menu>
 </template>
 
-<script>
+<script setup>
+import { House,Opportunity,Flag } from '@element-plus/icons-vue'
+import {ref} from "vue";
+let collapse = ref("true");
+const isCollapse = () => {
+  collapse.value = 'false'
+  console.log("false");
+  return{
+    collapse,
+    isCollapse
+  }
 
-export default {
-  name: "Aside"
 }
 </script>
 

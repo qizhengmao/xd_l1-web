@@ -1,53 +1,41 @@
 <template>
-  <el-container class="layout-container-demo" style="height: 100%">
-    <el-aside width="200px" style="height: 100%;">
-      <Aside></Aside>
-    </el-aside>
-
+  <el-container class="layout-container-demo" style="height: 100vh">
+      <el-aside width="200px" style="height: 100%" >
+        <el-scrollbar>
+          <Aside></Aside>
+        </el-scrollbar>
+      </el-aside>
     <el-container style="height: 100%;">
-      <el-header style="text-align: right; font-size: 12px">
-        <div class="toolbar">
-          <Header></Header>
+      <el-header style="text-align: right; font-size: 12px; padding-left: 0px;border-bottom: rgba(169,169,169,0.3) 1px solid">
+        <div style="display: flex; margin-top:20px">
+          <el-icon style="font-size: 20px" >
+            <Fold />
+          </el-icon>
+          <div style="flex: 1; text-align: center; font-size: 34px; margin-top: -15px">
+            <span>欢迎来到仓库管理系统</span>
+          </div>
+          <div class="toolbar">
+            <Header></Header>
+          </div>
         </div>
       </el-header>
-
       <el-main>
-        <el-scrollbar>
-          <el-table :data="tableData">
-            <el-table-column prop="date" label="Date" width="140" />
-            <el-table-column prop="name" label="Name" width="120" />
-            <el-table-column prop="address" label="Address" />
-          </el-table>
-        </el-scrollbar>
+        <Main></Main>
       </el-main>
     </el-container>
   </el-container>
+  <menu type="Message"></menu>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { Menu as IconMenu, Message, Setting } from '@element-plus/icons-vue'
+import { Fold } from '@element-plus/icons-vue';
 import Aside from "@/components/Aside";
 import Header from "@/components/Header";
-
-const item = {
-  date: '2016-05-02',
-  name: '王小虎',
-  address: '上海市普陀区金沙江路 1518 弄',
-}
-const tableData = ref(Array.from({ length: 20 }).fill(item))
+import Main from "@/components/Main";
 </script>
 
 <style scoped>
-.layout-container-demo .el-header {
-  position: relative;
-  background-color: var(--el-color-primary-light-7);
-  color: var(--el-text-color-primary);
-}
-.layout-container-demo .el-aside {
-  color: var(--el-text-color-primary);
-  background: var(--el-color-primary-light-8);
-}
+
 .layout-container-demo .el-menu {
   border-right: none;
 }
