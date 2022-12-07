@@ -8,9 +8,12 @@
     <el-container style="height: 100%;">
       <el-header style="text-align: right; font-size: 12px; padding-left: 0px;border-bottom: rgba(169,169,169,0.3) 1px solid">
         <div style="display: flex; margin-top:20px">
-          <el-icon style="font-size: 20px" >
-            <Fold />
-          </el-icon>
+          <div style="font-size: 20px">
+            <component  class="xxx" :is="Fold" ></component>
+          </div>
+<!--          <el-icon style="font-size: 20px" >-->
+<!--            <Fold />-->
+<!--          </el-icon>-->
           <div style="flex: 1; text-align: center; font-size: 34px; margin-top: -15px">
             <span>欢迎来到仓库管理系统</span>
           </div>
@@ -32,6 +35,8 @@ import { Fold } from '@element-plus/icons-vue';
 import Aside from "@/components/Aside";
 import Header from "@/components/Header";
 import Main from "@/components/Main";
+
+
 </script>
 
 <style scoped>

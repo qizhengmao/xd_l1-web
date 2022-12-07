@@ -6,10 +6,12 @@
           class="el-menu-vertical-demo"
           default-active="/Home"
           text-color="#fff"
-          :collapse=collapse
+          :collapse="collapse"
+          :collapse-transition="false"
       >
+        <button @click="isCollapse">aaa</button>
         <el-menu-item index="/Home">
-          <el-icon><House @click="isCollapse" /></el-icon>
+          <el-icon ><HomeFilled /></el-icon>
           <span>首页</span>
         </el-menu-item>
         <el-menu-item index="/One">
@@ -22,19 +24,18 @@
         </el-menu-item>
       </el-menu>
 </template>
-
 <script setup>
-import { House,Opportunity,Flag } from '@element-plus/icons-vue'
+import { HomeFilled,Opportunity,Flag } from '@element-plus/icons-vue'
 import {ref} from "vue";
-let collapse = ref("true");
+let collapse = ref(false);
+let a = ref(1);
 const isCollapse = () => {
-  collapse.value = 'false'
-  console.log("false");
+  collapse.value = !collapse.value;
+  console.log(collapse.value)
   return{
     collapse,
     isCollapse
   }
-
 }
 </script>
 
