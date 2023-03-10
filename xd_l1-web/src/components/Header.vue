@@ -1,40 +1,66 @@
 <template>
-  <div>
-    <span>王小虎</span>
+  <div style="display: flex;line-height: 60px">
+    <div style="margin-top:3px;cursor:pointer">
+      <i :class="isIcon" style="font-size: 20px" @click="collapse"></i>
+    </div>
+    <div style="flex: 1;text-align: center;font-size: 34px">
+      <span>欢迎来到仓库管理系统</span>
+    </div>
     <el-dropdown>
-      <el-icon style="margin-left: 5px; margin-right: 8px; margin-top: 1px" @click="aa">
-        <ArrowDown />
-      </el-icon>
-      <template #dropdown>
-        <el-dropdown-menu>
-          <el-dropdown-item @click="toUser">个人中心</el-dropdown-item>
-          <el-dropdown-item @click="logOut">退出登录</el-dropdown-item>
-        </el-dropdown-menu>
-      </template>
+      <span>{{user.name}}</span>
+      <i class="el-icon-caret-bottom" style="margin-left:5px "></i>
+      <el-dropdown-menu slot="dropdown">
+        <el-dropdown-item @click.native="toUser">个人中心</el-dropdown-item>
+        <el-dropdown-item @click.native="logout">退出登录</el-dropdown-item>
+      </el-dropdown-menu>
     </el-dropdown>
   </div>
-
 </template>
 
-<script setup>
-import {  ArrowDown } from '@element-plus/icons-vue';
-import emitter from "@/utils/eventbus.ts"
-import {ref} from "vue"; //引用刚刚新建的utils文件
+<script>
+export default {
+  name: "Header",
+  data(){
+    return {
+      confirm_disabled:false,
+      user : JSON.parse(sessionStorage.getItem('CurUser')),
+      isLogin : sessionStorage.getItem('isLogin ')
+    }
+  },
+  props: {
+    isIcon: String
+  },
+  methods: {
+    toUser() {
+      this.$router.push("/Home")
+    },
+    logout() {
+      this.$confirm('您确定要退出登录吗？','提示',{
+        confirmButtonText:'确定',
+        type:'warning',
+        center: true,
+      })
+          .then(() => {
+            this.$message({
+              type:'success',
+              message:'退出登录成功'
+            })
+            sessionStorage.clear()
+            this.$router.push("/")
+          })
+          .catch(() => {
+            this.$message({
+              type:'info',
+              message:'您已取消退出'
+            })
+          })
 
-const menuL = ref<Boolean>(false)	// 建立一个menuL
-const cpLeft = () => {	// head里面的图标点击按钮
-  menuL.value = !menuL.value	//首先把menuL取反
-  menuL.value ? head_icon.value = 'Expand' : head_icon.value = 'Fold'	//
-  emitter.emit("sayInfo",menuL.value)	//通过mitt的emit把menuL传递出去，sayInfo传参名称
+    },
+    collapse() {
+      this.$emit("doCollapse")
+    },
+  }
 }
-
-const toUser = () => {
-  console.log("toUser")
-}
-const logOut = () => {
-  console.log("logOut")
-}
-
 </script>
 
 <style scoped>

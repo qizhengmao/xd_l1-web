@@ -1,40 +1,52 @@
 <template>
-      <el-menu
-          style="height: 100vh"
-          active-text-color="#ffd04b"
-          background-color="#545c64"
-          class="el-menu-vertical-demo"
-          default-active="/Home"
-          text-color="#fff"
-          :collapse="collapse"
-          :collapse-transition="false"
-      >
-        <button @click="isCollapse">aaa</button>
-        <el-menu-item index="/Home">
-          <el-icon ><HomeFilled /></el-icon>
-          <span>首页</span>
-        </el-menu-item>
-        <el-menu-item index="/One">
-          <el-icon><Flag /></el-icon>
-          <span>待定一</span>
-        </el-menu-item>
-        <el-menu-item index="/Tow">
-          <el-icon><Opportunity /></el-icon>
-          <span>待定二</span>
-        </el-menu-item>
-      </el-menu>
+  <el-menu background-color="#545c64"
+           text-color="#fff"
+           active-text-color="#ffd04b"
+           default-active="/Home"
+           :collapse="isCollapse"
+           :collapse-transition="false"
+           style="height: 100%"
+           router
+  >
+    <el-menu-item index="/Home">
+      <i class="el-icon-s-home"></i>
+      <span slot="title">首页</span>
+    </el-menu-item>
+    <el-menu-item :index="'/'+item.menuclick" v-for="(item,i) in menu" :key="i">
+      <i :class="item.menuicon"></i>
+      <span slot="title">{{ item.menuname }}</span>
+    </el-menu-item>
+  </el-menu>
 </template>
-<script setup>
-import { HomeFilled,Opportunity,Flag } from '@element-plus/icons-vue'
-import {ref} from "vue";
-let collapse = ref(false);
-let a = ref(1);
-const isCollapse = () => {
-  collapse.value = !collapse.value;
-  console.log(collapse.value)
-  return{
-    collapse,
-    isCollapse
+
+<script>
+export default {
+  name: "Aside",
+  data(){
+    return{
+      //isCollapse:false
+      // menu:[
+      //   {
+      //     menuClick:'Admin',
+      //     menuName:'管理员管理',
+      //     menuIcon:'el-icon-s-custom'
+      //   },{
+      //     menuClick:'User',
+      //     menuName:'用户管理',
+      //     menuIcon:'el-icon-user-solid'
+      //   }
+      // ]
+    }
+  },
+  computed:{
+    "menu":{
+      get(){
+        return this.$store.state.menu
+      }
+    }
+  },
+  props:{
+    isCollapse:Boolean
   }
 }
 </script>

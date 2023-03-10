@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.background_program.mapper.RecordMapper">
+    <select id="pageCC" resultType="com.example.background_program.entity.RecordRes">
+        SELECT a.*,b.name goodsname,c.name storagename,d.name goodstypename,
+               (SELECT u.name FROM USER u WHERE u.id=a.userId)username,
+               (SELECT u.name FROM USER u WHERE u.id=a.admin_id)adminname
+        FROM record a,goods b,stoage c,goodsType d
+        ${ew.customSqlSegment}
+    </select>
+</mapper>

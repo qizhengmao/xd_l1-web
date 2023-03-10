@@ -1,23 +1,34 @@
 <template>
   <div id="app">
-    <Index></Index>
+    <router-view/>
   </div>
 </template>
-
 <script>
-
-import Index from "../src/components/Index.vue";
 export default {
   name: 'App',
-  components: {
-    Index
-
+  components: {},
+  data(){
+    return {
+      user: JSON.parse(sessionStorage.getItem('CurUser')),
+    }
+  },
+  watch:{
+    '$store.state.menu': {
+      handler(val,old) {
+        console.log("111")
+        if (!old && this.user && this.user) {
+          console.log("222")
+          this.$store.commit("setMenu",val)
+        }
+      },
+      immediate: true
+    },
   }
 }
 </script>
-
 <style>
-#app {
-height: 100%;
+#app{
+  overflow: scroll;
+  height: 100vh;
 }
 </style>

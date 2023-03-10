@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.background_program.mapper.GoodstypeMapper">
+    <select id="pageC" resultType="com.example.background_program.entity.Goodstype">
+        select * from goodsType
+    </select>
+    <select id="pageCC" resultType="com.example.background_program.entity.Goodstype">
+        select * from goodsType ${ew.customSqlSegment}
+    </select>
+</mapper>
